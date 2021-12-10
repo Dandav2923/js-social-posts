@@ -46,9 +46,21 @@ function getLikes(min, max) {
 }
 
 let likes = getLikes (1, 100000);
-console.log(likes);
+// console.log(likes);
+let likes2 = getLikes(1, 100000);
+let likes3 = getLikes(1, 100000);
+
 // creaimo una data per i post 
-const date = new Date();
+function randomDate(start, end) {
+    return new Date(start.getTime() + Math.random() * (end.getTime() - start.getTime()));
+}
+
+const date =  randomDate(new Date(2021, 0, 1), new Date());
+// console.log(data);
+const date2 = randomDate(new Date(2021, 0, 1), new Date());
+const date3 = randomDate(new Date(2021, 0, 1), new Date());
+
+
 // console.log(d.toDateString());
 let post = [
     {
@@ -62,17 +74,17 @@ let post = [
     {
         imageProfile: `https://unsplash.it/300/300?image=15`,
         author: `Phil Mangione`,
-        date: date,
+        date: date2,
         text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
-        counterLike: likes,
+        counterLike: likes2,
     },
     {
         imageProfile: `https://unsplash.it/300/300?image=15`,
         author: `Phil Mangione`,
-        date: date,
+        date: date3,
         text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
         imagePost: `https://unsplash.it/600/300?image=171`,
-        counterLike: likes,
+        counterLike: likes3,
     },
 ];
 
@@ -91,7 +103,7 @@ function printPost(array, container) {
                     </div>
                     <div class="post-meta__data">
                         <div class="post-meta__author">${obj.author}</div>
-                        <div class="post-meta__time">${obj.date}</div>
+                        <div class="post-meta__time">${obj.date.toDateString()}</div>
                     </div>                    
                 </div>
             </div>
@@ -108,7 +120,7 @@ function printPost(array, container) {
                         </a>
                     </div>
                     <div class="likes__counter">
-                        Piace a <b id="like-counter-1" class="js-likes-counter">${obj.likes}</b> persone
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${obj.counterLike}</b> persone
                     </div>
                 </div> 
             </div>            
@@ -120,3 +132,33 @@ function printPost(array, container) {
 
 const container = document.getElementById('container');
 printPost(post, container);
+
+
+const containerLikes = document.querySelectorAll('.likes__counter');
+console.log(containerLikes);
+const button = document.querySelectorAll('.likes__cta');
+console.log(button);
+let index;
+for (let index = 0; index < button.length; index++) {
+    button[index].addEventListener('click', function () {
+        containerLikes.innerHTML = '';
+        let newLikes = likes + 1;
+        const containerNewLikes = `
+        <div class="likes__counter">
+            Piace a <b id="like-counter-1" class="js-likes-counter">${newLikes}</b> persone
+        </div>
+        `;
+        containerLikes.innerHTML = containerNewLikes;
+    });
+    
+}
+// button.addEventListener('click', function() {
+//     containerLikes.innerHTML ='';
+//     let newLikes = likes + 1;
+//     const containerNewLikes = `
+//     <div class="likes__counter">
+//         Piace a <b id="like-counter-1" class="js-likes-counter">${newLikes}</b> persone
+//     </div>
+//     `;
+//     containerLikes.innerHTML = containerNewLikes;
+// });
