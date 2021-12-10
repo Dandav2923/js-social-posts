@@ -77,3 +77,46 @@ let post = [
 ];
 
 // creaiamo una funzione per stampare i post 
+function printPost(array, container) {
+    container.innerHTML = '';
+    for (let i = 0; i < array.length; i++) {
+        const obj = array[i];
+
+        const templatePost = `
+        <div class="post">
+            <div class="post__header">
+                <div class="post-meta">                    
+                    <div class="post-meta__icon">
+                        <img class="profile-pic" src="${obj.imageProfile}" alt="Phil Mangione">                    
+                    </div>
+                    <div class="post-meta__data">
+                        <div class="post-meta__author">${obj.author}</div>
+                        <div class="post-meta__time">${obj.date}</div>
+                    </div>                    
+                </div>
+            </div>
+            <div class="post__text">${obj.text}</div>
+            <div class="post__image">
+                <img src="${obj.imagePost}" alt="">
+            </div>
+            <div class="post__footer">
+                <div class="likes js-likes">
+                    <div class="likes__cta">
+                        <a class="like-button  js-like-button" href="#" data-postid="1">
+                            <i class="like-button__icon fas fa-thumbs-up" aria-hidden="true"></i>
+                            <span class="like-button__label">Mi Piace</span>
+                        </a>
+                    </div>
+                    <div class="likes__counter">
+                        Piace a <b id="like-counter-1" class="js-likes-counter">${obj.likes}</b> persone
+                    </div>
+                </div> 
+            </div>            
+        </div>
+      `;
+        container.innerHTML += templatePost;
+    }
+}
+
+const container = document.getElementById('container');
+printPost(post, container);
