@@ -69,14 +69,14 @@ let post = [
         date: date,
         text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
         imagePost: `https://unsplash.it/600/300?image=171`,
-        counterLike: likes,
+        counterLike: getLikes(1, 100000),
     },
     {
         imageProfile: `https://unsplash.it/300/300?image=15`,
         author: `Phil Mangione`,
         date: date2,
         text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
-        counterLike: likes2,
+        counterLike: getLikes(1, 100000),
     },
     {
         imageProfile: `https://unsplash.it/300/300?image=15`,
@@ -84,7 +84,7 @@ let post = [
         date: date3,
         text: `Placeat libero ipsa nobis ipsum quibusdam quas harum ut. Distinctio minima iusto. Ad ad maiores et sint voluptate recusandae architecto. Et nihil ullam aut alias.`,
         imagePost: `https://unsplash.it/600/300?image=171`,
-        counterLike: likes3,
+        counterLike: getLikes(1, 100000),
     },
 ];
 
@@ -140,18 +140,19 @@ const button = document.querySelectorAll('.likes__cta');
 console.log(button);
 let index;
 for (let index = 0; index < button.length; index++) {
-    button[index].addEventListener('click', function () {
-        containerLikes.innerHTML = '';
-        let newLikes = likes + 1;
+    button[index].addEventListener('click', function (event) {
+        event.preventDefault();
+        containerLikes[index].innerHTML = '';
+        let newLikes = post[index].counterLike + 1;
+        console.log(newLikes);
         const containerNewLikes = `
         <div class="likes__counter">
             Piace a <b id="like-counter-1" class="js-likes-counter">${newLikes}</b> persone
         </div>
         `;
-        containerLikes.innerHTML = containerNewLikes;
-    });
-    
-}
+        containerLikes[index].innerHTML = containerNewLikes;
+    });  
+} 
 // button.addEventListener('click', function() {
 //     containerLikes.innerHTML ='';
 //     let newLikes = likes + 1;
